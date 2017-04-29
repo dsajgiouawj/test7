@@ -1,6 +1,7 @@
 language: java
+sudo: false
 jdk: "-oraclejdk8"
-install: mvn install -DskipTests=true -Dgpg.skip=true
+script: mvn clean verify
 before_deploy:
         - mvn -P fatjar clean package -DskipTests=true -Dproject.finalName=$TRAVIS_TAG
 deploy:
@@ -10,7 +11,7 @@ deploy:
   file: target/$TRAVIS_TAG.jar
   on:
     repo: dsajgiouawj/test7
-all_branches: true
+  all_branches: true
     tags: true
     before_deploy:
         - mvn -P fatjar clean package -DskipTests=true -Dproject.finalName=$TRAVIS_TAG
