@@ -1,0 +1,16 @@
+language: java
+jdk: "-oraclejdk8"
+install: mvn install -DskipTests=true -Dgpg.skip=true
+before_deploy:
+        - mvn -P fatjar clean package -DskipTests=true -Dproject.finalName=$TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key:
+    secure: g9ml7ubZzlvGRIz8QJq1S/6gBeNFoBRmqDY3fjQqqykVieaIwep1xVItqm3ymL2RgTzuNAcdC7zMgiZbetIEyvCzxvvFMAGh0oeD7IP/fAHBeuJTkLK6l2of0wsP3nHC1NlAlFv8mpdVyEcJ5IuKxDGrqJ1b/7mQGkLVshJDtCf6XEjAbqq/mOheGnkBUqowrOMHG70T4XtXrGXtjmwdMrmbNIDM8g1HLip7t9R3u4WS7w5912t6jOShGT23stNf6HI0eARdc+7R1DmbKJzLIfeC6r8klB8SInUgm6/PTvegwpOAF9ww8QuQufLRNYF/L+Rg7iJL22owFJtAZ+4gVDeHyUEhEVrhwgVezuk3K4K3GcYQu8Tioael861RPCWsLKEJpQT3VeK/OMQElfKhETloIvoxfBX72HsWbGa+LFy8BkurSuPpHcZWZP6hDIboXTWEj94Axx6uISNSQ82AzGfNUgH5fXRsOF5vqKxFhtPiZWhqUu7X7LgWjM6AwFfCM8D6z6xiFGmrYwS8z0bz4ezZJqOLj5rhZEtn2lDIO7o7PaBv2wFqHO2yrQFmMGwCljaxRpNk+Q/+d440DuljgDD1kofL4kbzXFjSELrp5sSw0Rt/twzizmsXEz3oXwwd4FxUP1z2Ymxgs4JUIBpI1pPeO7weEc7BKye6RPF8efg=
+  file: target/$TRAVIS_TAG.jar
+  on:
+    repo: dsajgiouawj/test7
+all_branches: true
+    tags: true
+    before_deploy:
+        - mvn -P fatjar clean package -DskipTests=true -Dproject.finalName=$TRAVIS_TAG
