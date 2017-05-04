@@ -2,6 +2,8 @@ language: java
 sudo: false
 jdk: oraclejdk8
 script: mvn clean verify
+after_success:
+  - mvn clean test jacoco:report coveralls:report
 before_deploy:
         - mvn clean package -DskipTests=true -Dproject.finalName=$TRAVIS_TAG
 deploy:
